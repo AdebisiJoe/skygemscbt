@@ -1,0 +1,12 @@
+{
+  "name": "skygatescbt",
+  "displayName": "skygatescbt",
+  "expo": {
+    "name": "skygatescbt",
+    "slug": "skygatescbt",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
