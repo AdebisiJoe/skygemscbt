@@ -3,10 +3,13 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
     "lib": ["dom", "esnext"],
+    "typeRoots": ["node_modules/@types", "./typings"],
     "moduleResolution": "node",
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "strict": true
-  }
+    "strict": true,
+   
+  },
+  "include": ["node_modules/react-native-redash/lib/typescript/v1/index.d.ts"]
 }
