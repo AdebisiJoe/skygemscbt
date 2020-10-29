@@ -7,7 +7,7 @@ import { ApplicationProvider,Text,Input,Button,Card,
 import CheckBoxhelper from './CheckBoxhelper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
+import Snackbar from 'react-native-snackbar';
 export type currSubjectsYears={
     subject:string,
     year:number
@@ -91,13 +91,21 @@ export default function SelectSubjects({route,navigation}) {
       };
 
       const ontakeTestPress = (subjects:string[]): void => {
-    
+        
+        if(subjects.length<1){
+          
+          // Snackbar.show({
+          //   text: 'Please pick a subject',
+          //   duration: Snackbar.LENGTH_LONG,
+          // });
+          alert('pick a subject');
+        }else{
         navigation && navigation.navigate('Quiz2',{
             subjects,
             testTime
           });
 
-        
+        }
 
       };
 

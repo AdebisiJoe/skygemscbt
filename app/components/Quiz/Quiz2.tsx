@@ -3,12 +3,14 @@ import { StyleSheet, ImageBackground,Dimensions,Image,View,ScrollView} from 'rea
 import QuizContainer from './QuizContainer';
 import { questions } from './data';
 import WebView from 'react-native-webview';
-import { Button,Text,Modal,Card} from '@ui-kitten/components';
+import { Button,Text,Modal,Card, ButtonGroup} from '@ui-kitten/components';
 import HTML from 'react-native-render-html';
 import { Calculator } from 'react-native-calculator'
 import Answers from './Answers';
 import CountDownHelper from '../Utils/CountDownHelper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import FloatingActionButton from '@lucasmrc435/rn-fab'
+
 
 import {
   CRS_2009,
@@ -21,6 +23,7 @@ import {
 } from './QuestionHelper';
 
 import {getQuestions} from './QuizHelper';
+import { ButtonSwitch } from './ButtonSwitch';
 
 const {height,width}=Dimensions.get('window');
 
@@ -76,7 +79,8 @@ export default  function Quiz2({route,navigation}) {
    const [count, setCount] = React.useState(0);
    const [visible, setVisible] = React.useState(false);
    const Questions=Literature_2010;
-   
+   const [selectedIndex, setSelectedIndex] = React.useState();
+
  
   
    
@@ -97,20 +101,25 @@ export default  function Quiz2({route,navigation}) {
   const getCurrentQuestionIndex=(quNo)=>{
     let currentSelectedIndex:selectedIndexProps=undefined;
     let ifhjgjh=checkifQuestionhasbeensolved(quNo);
+    console.log("what came in "+quNo);
     
+    // if(quNo==0){
+    //   return currentSelectedIndex;
+    // }
+
     if(ifhjgjh==null||ifhjgjh==undefined){
      return currentSelectedIndex;
     }else{
-      ifhjgjh.map((ok)=>{
-        console.log(ok.answer);
+      // ifhjgjh.map((ok)=>{
+        console.log("here is the quessolved log "+ifhjgjh.answer);
         currentSelectedIndex={
           questionNumber:quNo,
-          option:getOptionByAnswer(ok.answer)[0],
-          index:getOptionByAnswer(ok.answer)[1],
-          answerIsCorrect:ok.answerIsCorrect
-      }
+          option:getOptionByAnswer(ifhjgjh.answer)[0],
+          index:getOptionByAnswer(ifhjgjh.answer)[1],
+          answerIsCorrect:ifhjgjh.answerIsCorrect
+        }
       //setQuestionSelectedIndex(currentSelectedIndex);
-      });
+      // });
       return currentSelectedIndex;
     }
   }
@@ -171,11 +180,17 @@ export default  function Quiz2({route,navigation}) {
    }
 
    const checkifQuestionhasbeensolved=(qusno)=>{
-    return userSelectedAnswers.filter(
-      function(userSelectedAnswers) {
-        return userSelectedAnswers.questionNumber == qusno
+    // return userSelectedAnswers.filter(
+    //   function(userSelectedAnswers) {
+    //     return userSelectedAnswers.questionNumber == qusno
+    //   }
+    // );
+
+    for (var i = 0; i < userSelectedAnswers.length; i++) {
+      if (userSelectedAnswers[i].questionNumber == qusno) {
+          return(userSelectedAnswers[i]);
       }
-    );
+  }
    }
 
    function mergeArrayWithObject(arr:currAnswerObjectProps[],ans:currAnswerObjectProps){
@@ -320,25 +335,63 @@ export default  function Quiz2({route,navigation}) {
                
                 
                 <View style={{backgroundColor:'white',flexDirection:'row',justifyContent:'center',width:width,flexWrap: 'wrap'}}> 
-                 
-                    {Questions.map((_, index)=>(
-                      <Fragment key={index}  >
-                        
-                        <Button appearance='outline' status={getCurrentQuestionIndex(curNum)?'warning':'primary'}   onPress={()=>{
-                           setCurNum(index)     
-                        }} style={{width:70,height:50,}}>{index+1}</Button>
+                <ButtonSwitch  selectedIndex={selectedIndex}
+                    onSelect={index => {
+                      setSelectedIndex(index)
+                      console.log("index logged here "+index)
+                      setCurNum(index) 
+                      }}>
 
-                      </Fragment>
-                      ))}
+                    {Questions.map((_, ok)=>(
+  
+                        <Button key={ok} 
+                                appearance='outline'
+                                
+                                 onPress={()=>{
+                           setCurNum(ok)  
+                             
+                        }} style={{width:70,height:50,}}>{ok+1}</Button>
+                      
                      
+                      
+                      ))}
+                    </ButtonSwitch>
                 </View> 
                
              </View>
 
             <View style={{justifyContent:'center',marginHorizontal:20}}>
               <Button style={{marginTop:20}} onPress={() => onFinishTestPress()}>Submit Test</Button>
+              {/* <FAB buttonColor="red" iconTextColor="#FFFFFF"  visible={true} iconTextComponent={<Icon name="angle-right"/>} /> */}
+
+              <FloatingActionButton 
+                  color="red" 
+                  position="right"
+                  icon='arrow-right'
+                  onPress={() => {
+                    if(curNum!=Questions.length-1)
+                     {
+                       setCurNum(curNum=curNum+1)
+                     }else{
+                       setCurNum(Questions.length-1)
+                     }
+                   }}
+                  />
+                 <FloatingActionButton 
+                  color="red" 
+                  position="left"
+                  icon='arrow-left'
+                  onPress={() => {
+                    if(curNum!=0)
+                     {
+                       setCurNum(curNum=curNum-1)
+                     }else{
+                       setCurNum(0)
+                     }
+                   }}
+                  />
             </View>
-                 
+            
            </ScrollView>
 
 

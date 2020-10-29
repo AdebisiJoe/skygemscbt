@@ -1,7 +1,10 @@
 import React,{Fragment,useEffect} from 'react'
 import { View,Dimensions } from 'react-native'
-import { Radio, RadioGroup, } from '@ui-kitten/components';
+import { Radio, RadioGroup,Text } from '@ui-kitten/components';
+import HTML from 'react-native-render-html';
 const {height,width}=Dimensions.get('window');
+
+
 
 export type selectedIndexProps={
   questionNumber:number,
@@ -52,19 +55,28 @@ export default function Answers({data,answerSelected,currentSelectedIndex}:Answe
           }}> 
 
         <Radio >
-          {data.OptionA}
+        {evaProps => 
+          <HTML html={data.OptionA} imagesMaxWidth={Dimensions.get('window').width}  />
+          }
         </Radio>
 
         <Radio >
-          {data.OptionB}
+          {evaProps => 
+          <HTML html={data.OptionB} imagesMaxWidth={Dimensions.get('window').width}  />
+          }
+          
         </Radio>
 
         <Radio >
-          {data.OptionC}
+        {evaProps => 
+          <HTML html={data.OptionC} imagesMaxWidth={Dimensions.get('window').width}  />
+          }
         </Radio>
 
         <Radio >
-          {data.OptionD}
+        {evaProps => 
+          <HTML  html={data.OptionD} imagesMaxWidth={Dimensions.get('window').width}  />
+          }
         </Radio>
 
         {/* {data.OptionE ? <Radio>{data.OptionE}</Radio>:null } */}

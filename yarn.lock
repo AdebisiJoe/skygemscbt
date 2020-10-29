@@ -1851,6 +1851,11 @@
     "@babel/runtime" "^7.7.2"
     core-js "^3.4.1"
 
+"@lucasmrc435/rn-fab@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@lucasmrc435/rn-fab/-/rn-fab-0.0.2.tgz#2925174b43e8c5ed1109750a0bf5e1875ae3af9a"
+  integrity sha512-IPsryjiRzXl57vRsmVkPlIPXgA/op3sfedouZeMZ5WsJlEm9LUjgyqya6mAeACiUit7qBZ0mkEcINyDaT8NWsg==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -9891,6 +9896,11 @@ react-native-screens@~2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.9.0.tgz#ead2843107ba00fee259aa377582e457c74f1f3b"
   integrity sha512-5MaiUD6HA3nzY3JbVI8l3V7pKedtxQF3d8qktTVI0WmWXTI4QzqOU8r8fPVvfKo3MhOXwhWBjr+kQ7DZaIQQeg==
+
+react-native-snackbar@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/react-native-snackbar/-/react-native-snackbar-2.2.3.tgz#0b1df239569d27372f1f7244bad5d1615d188a3f"
+  integrity sha512-JDS3S50i7F2w8X5JQyamNc/cVHYHAxd74VETeNQ1rB73lClWk2J99xEWgRz2r6hPHhJMEp9dGR7NZMYAVS4ozQ==
 
 react-native-svg-charts@^5.4.0:
   version "5.4.0"

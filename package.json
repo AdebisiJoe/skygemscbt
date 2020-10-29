@@ -10,6 +10,7 @@
   "dependencies": {
     "@eva-design/eva": "^2.0.0",
     "@expo/webpack-config": "^0.12.31",
+    "@lucasmrc435/rn-fab": "^0.0.2",
     "@react-native-community/async-storage": "^1.12.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/netinfo": "^5.9.7",
@@ -40,6 +41,7 @@
     "react-native-responsive-screen": "^1.4.1",
     "react-native-safe-area-context": "~3.0.7",
     "react-native-screens": "~2.9.0",
+    "react-native-snackbar": "^2.2.3",
     "react-native-svg": "^12.1.0",
     "react-native-svg-charts": "^5.4.0",
     "react-native-unimodules": "~0.10.0",

@@ -8,13 +8,6 @@ import { questions } from './data';
 import  {useScrollHandler}  from 'react-native-redash/lib/module/v1';
 import { Button,ButtonGroup , Layout, Tab, TabView, Text} from '@ui-kitten/components';
 
-
-//import  useScrollHandler  from "react-native-redash";
-import Answers from './Answers';
-import QuestionButtons from './QuestionButtons';
-
-// const {View,ScrollView} = Animated;
-
 const {height,width}=Dimensions.get('window');
 
 
@@ -56,3 +49,4 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
   });
+
