@@ -1,28 +1,14 @@
-import React,{useRef, Fragment,useState,useEffect} from 'react'
-import { StyleSheet, ImageBackground,Dimensions,Image,View,ScrollView} from 'react-native';
+import React,{useState,useEffect} from 'react'
+import { Dimensions,View,ScrollView, ImageBackground,StyleSheet} from 'react-native';
 import QuizContainer from './QuizContainer';
-import { questions } from './data';
-import WebView from 'react-native-webview';
-import { Button,Text,Modal,Card, ButtonGroup} from '@ui-kitten/components';
+import { Button,Text,Modal} from '@ui-kitten/components';
 import HTML from 'react-native-render-html';
 import { Calculator } from 'react-native-calculator'
 import Answers from './Answers';
-import CountDownHelper from '../Utils/CountDownHelper';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import FloatingActionButton from '@lucasmrc435/rn-fab'
 
 
-import {
-  CRS_2009,
-  CRS_2010,
-  CRS_2011,
-  CRS_2012,
-  Literature_2008,
-  Literature_2009,
-  Literature_2010,
-} from './QuestionHelper';
 
-import {getQuestions} from './QuizHelper';
 import { ButtonSwitch } from './ButtonSwitch';
 
 const {height,width}=Dimensions.get('window');
@@ -62,9 +48,8 @@ interface QuestionSlideProps{
 
  
 
-export default  function Quiz2({route,navigation}) {
-  //{route,navigation,Question:[]}
-   const { subjects,testTime } = route.params;
+export default  function SubjectQuiz({Question,scoresetter,subject}) {
+
    const [qloading,setqloading]= useState<boolean>(false);
    const [userSelectedAnswers,setUserSelectedAnswers]=useState<currAnswerObjectProps[]>([]); 
   //  const [Questions,setQuestions]=useState<questionsObjects[]>([]);
@@ -73,14 +58,13 @@ export default  function Quiz2({route,navigation}) {
    const [totalQuestions,setTotalQuestions]=useState<number>(0);
    const [quizOver,setQuizOver] =useState<boolean>(false);
    const [scrolling,setScrolling] = useState<boolean>(false);
-   const [Question,setQuestion]= useState<questionsObjects[]>();
+   const [Questions,setQuestions]= useState<questionsObjects[]>(Question);
    const [Options,setOptions]= useState([]);
    const [QuestionSelectedIndex,setQuestionSelectedIndex]= useState<selectedIndexProps>();
    const [count, setCount] = React.useState(0);
    const [visible, setVisible] = React.useState(false);
-  
    const [selectedIndex, setSelectedIndex] = React.useState();
-   const Questions=questions;  
+   
    
     
    const checkIfuserAnswerisCorrect=(questionNo,userAnswer)=>{
@@ -130,32 +114,39 @@ export default  function Quiz2({route,navigation}) {
          
         //check if the question has been answered before
         const currentQuestionIndex=getCurrentQuestionIndex(curNum);
-        
+        const QuestionCount=Questions.length;
         if(currentQuestionIndex==null){
-        //Increment score if answer is correct
-        if(answerIsCorrect){
-          setScore((score)=>score+1);
-        }
-
-        }else{
-         
-          if(currentQuestionIndex.answerIsCorrect==true){
-            if(answerIsCorrect){
-              setScore((score)=>score);
-            }else{
-              setScore((score)=>score-1);
-            }
-          }else{
+            //Increment score if answer is correct
+            
             if(answerIsCorrect){
               setScore((score)=>score+1);
-            }else{
-              setScore((score)=>score);
+              
             }
-          }
+    
+            }else{
+             
+              if(currentQuestionIndex.answerIsCorrect==true){
+                if(answerIsCorrect){
+                  setScore((score)=>score);
+                 
+                }else{
+                  setScore((score)=>score-1);
+                  
+                }
+              }else{
+                if(answerIsCorrect){
+                  setScore((score)=>score+1);
+                  
+                }else{
+                  setScore((score)=>score);
+                  
+                }
+              }
+    
+            }
 
-        }
-
-
+        
+        scoresetter(score,subject,QuestionCount);
         console.log("score is now "+score);
         //save current answer to userselected answer
         const currentAnswerObject ={
@@ -272,62 +263,36 @@ export default  function Quiz2({route,navigation}) {
 
    useEffect(()=>{
      console.log(userSelectedAnswers); 
-   },[userSelectedAnswers])
+   })
   
-   const CalculatorIcon = (props) => (
-    <Icon size={25}  name='calculator'/>
-  );
+ 
 
 
-   React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-       
-       <View style={{flexDirection: "row",justifyContent: "flex-end",paddingRight:10,width:300}}>
-          <Button style={{marginLeft:30}} appearance='ghost' status='danger' size='large' accessoryLeft={CalculatorIcon}
-            onPress={() => setVisible(true)}
-          />
-         <CountDownHelper  time={testTime} />
-       </View>
-        
-        
-      ),
-    });
-  }, [navigation, setCount]);
+
  
     
     return (
+      
 
       <QuizContainer >
         
         
         <View  style={{flex:1,justifyContent:'center',flexDirection:'column'}}>
-        <View style={{flex:1,height:height*0.5,width:200}}>
-             <Modal style={{flex:1,height:height*0.5,width:250}} visible={visible}>
-              
-              <Calculator style={{ flex: 1 }} />
-               
-               <Button status='warning' onPress={() => setVisible(false)}>
-                  Close 
-               </Button>
-              
-             </Modal>
-             </View>
+
           <ScrollView>
 
              <View  style={{backgroundColor:'white',alignItems:'center'}}>
                <Text category='label'>{curNum+1}/{Questions.length}</Text>
-               <Text category='label'>Score now{score}</Text>
                
              </View>
-              <View style={{height:height*0.2,backgroundColor:'white',alignItems:'center',marginHorizontal:15}}>
+              <View style={{height:height*0.2,backgroundColor:'white',alignItems:'center',marginHorizontal:15,}}>
                  
                   <HTML html={getQuestion(curNum)} imagesMaxWidth={Dimensions.get('window').width}  />
               </View>
 
-              <View style={{flex:1,backgroundColor:"white",height:0.4*height,paddingTop:10}}>
+              <View style={{flex:1,backgroundColor:"white",height:0.4*height,paddingTop:10,marginVertical:15,flexWrap: 'wrap'}}>
                   
-              <Answers data={getOptions(curNum)} answerSelected={answerSelected} currentSelectedIndex={getCurrentQuestionIndex(curNum)} />  
+                 <Answers data={getOptions(curNum)} answerSelected={answerSelected} currentSelectedIndex={getCurrentQuestionIndex(curNum)} />  
              
               </View>
 
@@ -363,8 +328,8 @@ export default  function Quiz2({route,navigation}) {
              </View>
 
             <View style={{justifyContent:'center',marginHorizontal:20}}>
-              <Button style={{marginTop:20}} onPress={() => onFinishTestPress()}>Submit Test</Button>
-              {/* <FAB buttonColor="red" iconTextColor="#FFFFFF"  visible={true} iconTextComponent={<Icon name="angle-right"/>} /> */}
+              {/* <Button style={{marginTop:20}} onPress={() => onFinishTestPress()}>Submit Test</Button> */}
+              
 
               <FloatingActionButton 
                   color="red" 
@@ -401,5 +366,8 @@ export default  function Quiz2({route,navigation}) {
            
 
       </QuizContainer>
+      
     )
 }
+
+

@@ -1,11 +1,3 @@
-// import { questions } from './data';
-// import { CRS_2009 } from '../../data/CRS_2009';
-// import { CRS_2010 } from '../../data/CRS_2010';
-// import { CRS_2011 } from '../../data/CRS_2011';
-// import { Literature_2008 } from '../../data/Literature_2008';
-// import { Literature_2009 } from '../../data/Literature_2009';
-// import { Literature_2010 } from '../../data/Literature_2010';
-
 export { questions } from './data';
 export { CRS_2009 } from '../../data/CRS_2009';
 export { CRS_2010 } from '../../data/CRS_2010';
@@ -14,4 +6,15 @@ export { CRS_2012 } from '../../data/CRS_2012';
 export { Literature_2008 } from '../../data/Literature_2008';
 export { Literature_2009 } from '../../data/Literature_2009';
 export { Literature_2010 } from '../../data/Literature_2010';
+export { Physics_2016 } from '../../data/Physics_2016';
+export { Physics_2017 } from '../../data/Physics_2017';
+export { Physics_2018 } from '../../data/Physics_2018';
+export { Physics_2019 } from '../../data/Physics_2019';
+export { Geography_2018 } from '../../data/Geography_2018';
+export { Geography_2019 } from '../../data/Geography_2019';
+export { Chemistry_2018 } from '../../data/Chemistry_2018';
+export { Chemistry_2019 } from '../../data/Chemistry_2019';
+export { Biology_2017 } from '../../data/Biology_2017';
+export { Biology_2018 } from '../../data/Biology_2018';
+export { Biology_2019 } from '../../data/Biology_2019';
 

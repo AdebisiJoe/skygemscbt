@@ -42,18 +42,18 @@ export default function SelectSchool({ navigation }:any) {
 
       style={styles.selectschoolbackground}
       resizeMode="contain"
-      source={require('../../../assets/images/signinbackground.png')}> 
+      source={require('../../../assets/images/homeplain.png')}> 
         {/* <TopNavigation
           accessoryLeft={BackAction}
           title='back'
        />  */}
 
-        <View style={{flex:1,flexDirection:'column',backgroundColor:'white',paddingVertical: 24,paddingHorizontal:16}} >
+        <View style={{flex:1,flexDirection:'column',paddingVertical: 24,paddingHorizontal:16}} >
         
         {schoolsubjects.map(({school}, index)=>(
 
          <Card style={{height:50}} onPress={()=>onSelectSchoolCardPress(school)} key={index} >                   
-              <Text >
+              <Text  category='s2'>
               {school}
              </Text>                     
          </Card>

@@ -46,7 +46,7 @@ export default function Answers({data,answerSelected,currentSelectedIndex}:Answe
 
     return (
 
-    <View style={{width:width,padding:20,flexDirection:'row',justifyContent:'center'}}>
+    <View style={{width:width,padding:20,flexDirection:'row',justifyContent:'center',marginHorizontal:15,flexWrap: 'wrap'}}>
        <RadioGroup
         selectedIndex={selectedIndex}
         onChange={index =>{ 
@@ -79,7 +79,12 @@ export default function Answers({data,answerSelected,currentSelectedIndex}:Answe
           }
         </Radio>
 
-        {/* {data.OptionE ? <Radio>{data.OptionE}</Radio>:null } */}
+        {data.OptionE ? 
+          <Radio>       
+            {evaProps => 
+              <HTML  html={data.OptionD} imagesMaxWidth={Dimensions.get('window').width}  />
+            }
+          </Radio>:null } 
       </RadioGroup>
     </View> 
 

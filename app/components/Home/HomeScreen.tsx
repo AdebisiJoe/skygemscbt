@@ -25,7 +25,7 @@ export default function HomeScreen({navigation}:any) {
       };
       
     const onLeaderBoardPress = (): void => {
-        navigation && navigation.navigate('study');
+        navigation && navigation.navigate('LeaderBoard');
       };  
       
     const onActivatePress = (): void => {

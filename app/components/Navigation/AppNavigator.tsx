@@ -5,6 +5,7 @@ import Signup from '../Signup/signup';
 import HomeScreen from '../Home/HomeScreen';
 import Quiz from '../Quiz/Quiz';
 import Quiz2 from '../Quiz/Quiz2';
+
 import SelectSchool from '../SelectSchool/SelectSchool';
 import SelectSubjects from '../SelectSubjects/SelectSubjects';
 import ActivationOptions from '../Activation/ActivationOptions';

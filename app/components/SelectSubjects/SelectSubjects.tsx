@@ -100,7 +100,7 @@ export default function SelectSubjects({route,navigation}) {
           // });
           alert('pick a subject');
         }else{
-        navigation && navigation.navigate('Quiz2',{
+        navigation && navigation.navigate('Quiz',{
             subjects,
             testTime
           });
@@ -150,15 +150,14 @@ export default function SelectSubjects({route,navigation}) {
    }
  
     return (
+      <ImageBackground
+      style={styles.homebackground}
+      resizeMode="cover"
+      source={require('../../../assets/images/homeplain.png')}>
+        <View style={{flex:1,flexDirection:'column'}}>
 
-        <View style={{flex:1,flexDirection:'column',backgroundColor:'white'}}>
-
-           
-     
         <ScrollView  style={{paddingVertical: 24,paddingHorizontal:16}}>
-             
-            
-     
+ 
         <View style={{marginTop:wp('10%')}}>
            <Text category='p1' style={{alignSelf:'flex-start',marginBottom:-wp('8%'),}}>Set Test Time</Text>
            <Select
@@ -215,6 +214,15 @@ export default function SelectSubjects({route,navigation}) {
         </ScrollView>
 
         </View>
-      
+       </ImageBackground>
     )
 }
+
+const styles = StyleSheet.create({
+  menuContainer:{
+      flex:1
+  },
+  homebackground:{
+      height: '100%',
+      width: '100%'
+  }});
