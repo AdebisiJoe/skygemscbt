@@ -64,8 +64,8 @@ export default function AuthNavigator() {
       
     <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home',headerStyle: { backgroundColor: '#F0F4FF'} }} />
-        <Stack.Screen name="SelectSchool" component={SelectSchool} />
-        <Stack.Screen name="SelectSubjects" component={SelectSubjects} />
+        <Stack.Screen name="SelectSchool" component={SelectSchool} options={{ title: 'Select School',headerStyle: {backgroundColor: '#F0F4FF'} }} />
+        <Stack.Screen name="SelectSubjects" component={SelectSubjects} options={{ title: 'Select Subjects',headerStyle: {backgroundColor: '#F0F4FF'} }} />
         <Stack.Screen name="Quiz" component={MutipleQuiz} options={{ title: 'Exam' ,headerStyle: { backgroundColor: '#F0F4FF'} }} />
         <Stack.Screen name="LeaderBoard" component={LeaderBoard} options={{ title: 'Leader Board',headerStyle: {backgroundColor: '#F0F4FF'} }} />
         <Stack.Screen name="Login" component={Login}  options={{ headerShown: false }} />

@@ -82,7 +82,7 @@ export default function Answers({data,answerSelected,currentSelectedIndex}:Answe
         {data.OptionE ? 
           <Radio>       
             {evaProps => 
-              <HTML  html={data.OptionD} imagesMaxWidth={Dimensions.get('window').width}  />
+              <HTML  html={data.OptionE} imagesMaxWidth={Dimensions.get('window').width}  />
             }
           </Radio>:null } 
       </RadioGroup>

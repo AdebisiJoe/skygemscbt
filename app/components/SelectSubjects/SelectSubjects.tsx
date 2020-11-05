@@ -210,7 +210,7 @@ export default function SelectSubjects({route,navigation}) {
          </Card>
 
           ))}
-          <Button style={{marginTop:20}} onPress={() => ontakeTestPress(testSubjects)}>Take test</Button>
+          <Button style={{marginTop:20,width:280,backgroundColor:'#A5A0F5',alignSelf:'center'}} onPress={() => ontakeTestPress(testSubjects)}>Take test</Button>
         </ScrollView>
 
         </View>
