@@ -2,6 +2,7 @@ import React , { ReactElement } from 'react';
 import { StyleSheet,View,ImageBackground ,ScrollView} from 'react-native';
 import Constants from "expo-constants";
 import { StatusBar } from 'expo-status-bar';
+import { Card,Button } from '@ui-kitten/components';
 
 interface QuizContainerProps{
     children:ReactElement;
@@ -14,9 +15,12 @@ export default function QuizContainer({children}:QuizContainerProps) {
         style={styles.homebackground}
         resizeMode="cover"
         source={require('../../../assets/images/homeplain.png')}> 
-        <View 
-        style={{paddingTop:Constants.statusBarHeight,flex:1,}}>
-           {children}    
+        <View
+        >
+           {children}  
+ 
+           
+      
           
         </View>
         </ImageBackground>

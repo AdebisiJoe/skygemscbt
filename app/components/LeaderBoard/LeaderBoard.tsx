@@ -16,7 +16,7 @@ export default function LeaderBoard() {
                         
                                        
                             <Card style={[styles.longCard1]}>
-                                <Avatar shape='square' style={{alignSelf:'flex-start',marginTop:-wp('0%') }} source={require(`../../../assets/rankimages/${data.rank}.png`)} />
+                                <Avatar shape='square' style={{alignSelf:'flex-start',marginTop:-wp('0%') }} source={require(`../../../assets/rankimages/1.png`)} />
                                 <Text style={{alignSelf:'center',marginTop:-wp('5%')}} category='s2' >
                                 {data.score}
                                 </Text>

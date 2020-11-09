@@ -26,6 +26,9 @@ import Quiz2 from './app/components/Quiz/Quiz2';
 import SelectSchool from './app/components/SelectSchool/SelectSchool';
 import SelectSubjects from './app/components/SelectSubjects/SelectSubjects';
 import ActivationOptions from './app/components/Activation/ActivationOptions';
+import SideBarNavigator from './app/components/Navigation/SideBarNavigator';
+
+
 
 
 const AppStack=createStackNavigator();
@@ -58,9 +61,14 @@ export default function App() {
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
       <AuthContext.Provider value={{ user, setUser }}>
+        {/* <OfflineNotice /> */}
         
         <NavigationContainer >
-          {user ? <AppNavigator /> : <AuthNavigator  />}
+        
+          {/* {user ?  */}
+          <SideBarNavigator /> 
+
+          {/* : <AuthNavigator  />} */}
         </NavigationContainer>
       </AuthContext.Provider>
     </ApplicationProvider>

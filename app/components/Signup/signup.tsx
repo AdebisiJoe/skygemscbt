@@ -3,10 +3,31 @@ import { StyleSheet, View, ImageBackground,Dimensions,Image,TouchableWithoutFeed
 import { Input,Button } from '@ui-kitten/components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { ScrollView } from 'react-native-gesture-handler';
+import ActivityIndicator from "../Utils/ActivityIndicator";
 import usersApi from "../../api/users";
-import auth from '../../api/auth';
+import * as Yup from "yup";
+import useApi from "../../hooks/useApi";
+
+
+import {
+  ErrorMessage,
+  Form,
+  FormField,
+  SubmitButton,
+} from "../../forms";
+import authApi from '../../api/auth';
 import useAuth from '../../auth/useAuth';
 
+
+
+const validationSchema = Yup.object().shape({
+  phone: Yup.number().required().min(11).label("Phone Number"),
+  email: Yup.string().required().email().label("Email"),
+  username: Yup.string().required().min(4).label("Username"),
+  name: Yup.string().required().min(4).label("Name"),
+  password: Yup.string().required().min(4).label("Password"),
+  password_confirmation: Yup.string().required().min(4).label("password confirmation"),
+});
 
 
 export default function Signup({ navigation }:any)  {
@@ -52,7 +73,7 @@ export default function Signup({ navigation }:any)  {
     alert('could not sign you up');
     return;
   }else{
-    const result = await auth.login(phone, password);
+    const result = await authApi.login(phone, password);
     if (!result.ok){
       alert('Authentication Failed')
       return;
@@ -63,6 +84,32 @@ export default function Signup({ navigation }:any)  {
 
 
    // navigation && navigation.navigate('Home');
+  };
+  
+  const registerApi = useApi(usersApi.register);
+  const loginApi = useApi(authApi.login);
+  const auth = useAuth();
+  const [error, setError] = React.useState("");
+
+  const handleSubmit = async (userInfo) => {
+    console.log(userInfo);
+    const result = await registerApi.request(userInfo);
+    console.log(result)
+
+    if (!result.ok) {
+      if (result.data) setError(result.data.error);
+      else {
+        setError("An unexpected error occurred.");
+        console.log(result);
+      }
+      return;
+    }
+
+    const { data: authToken } = await loginApi.request(
+      userInfo.phone,
+      userInfo.password
+    );
+    auth.logIn(authToken);
   };
 
   
@@ -81,70 +128,88 @@ export default function Signup({ navigation }:any)  {
          <Image style={{marginBottom:5, width:100, height:100 }} source={require('../../../assets/images/skygatelogo.png')} />
        </View> 
         <View style={styles.formContainer}>
-          <Input
-            label='Name'
-            size='small'
-            placeholder='name'          
-            status='warning'
-            value={name}
-            onChangeText={setName}
-          />
-          <Input
-            label='EMAIL'
-            size='small'
-            placeholder='Email'          
-            status='warning'
-            value={email}
-            onChangeText={setEmail}
-          />
-            <Input
-            label='PHONE NUMBER'
-            size='small'
-            placeholder='Phone Number'          
-            status='warning'
-            value={phone}
-            onChangeText={setPhone}
-          />
-            <Input
-            label='USERNAME'
-            size='small'
-            placeholder='Username'          
-            status='warning'
-            value={username}
-            onChangeText={setUsername}
-          />
-          <Input
-            style={styles.passwordInput}
-            size='small'
-            placeholder='Password'
-            label='PASSWORD'
-            status='warning'
-            value={password}
-            accessoryRight={renderIcon}
-            
-            secureTextEntry={secureTextEntry}
-            onChangeText={setPassword}
-          />
-          <Input
-            style={styles.passwordInput}
-            size='small'
-            placeholder='Confirm Password'
-            label='CONFIRM PASSWORD'
-            status='warning'
-            value={passwordconfirmation}
-            accessoryRight={renderIcon}
-            
-            secureTextEntry={secureTextEntry}
-            onChangeText={setPasswordConfirmation}
-          />
-        </View>
-        <Button
-          style={{paddingTop:20}}
-          status='warning'
+        <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
+
+        <Form
+          initialValues={{ name: "", email: "", phone: "",username: "",password: "",password_confirmation: "" }}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema}
+        >
+
+          <FormField
+          autoCapitalize="none"
+          autoCorrect={false}
           size='small'
-          onPress={onSignUpButtonPress}>
-          SIGN UP
-        </Button>
+          keyboardType="default"
+          label='Name'
+          name="name"
+          placeholder="Full Name"
+          textContentType="Full Name"
+          />
+        
+          <FormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          size='small'
+          keyboardType="email-address"
+          label='Email'
+          name="email"
+          placeholder="Email"
+          textContentType="Email"
+          />
+
+
+          <FormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          size='small'
+          keyboardType="phone-pad"
+          label='Phone Number'
+          name="phone"
+          placeholder="Phone Number"
+          textContentType="Phone Number'"
+          />
+
+         <FormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          size='small'
+          keyboardType="default"
+          label='Username'
+          name="username"
+          placeholder="Username"
+          textContentType="Username"
+          />
+
+          <FormField
+          style={styles.passwordInput}
+          size='small'
+          autoCapitalize="none"
+          autoCorrect={false}
+          accessoryRight={renderIcon}
+          label='PASSWORD'
+          name="password"
+          placeholder="Password"
+          secureTextEntry={secureTextEntry}
+          textContentType="password"
+        />
+
+         <FormField
+          style={styles.passwordInput}
+          size='small'
+          autoCapitalize="none"
+          autoCorrect={false}
+          accessoryRight={renderIcon}
+          label='PASSWORD'
+          name="password_confirmation"
+          placeholder="confirm password"
+          secureTextEntry={secureTextEntry}
+          textContentType="password"
+        />
+
+        <SubmitButton style={{paddingTop:20}} status='warning' size='small' title="SIGN UP" />
+        </Form>
+        </View>
         <View style={styles.socialAuthContainer}>
 
           <Button

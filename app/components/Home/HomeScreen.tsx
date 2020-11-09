@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground,Dimensions,Image,ScrollView} from 'react-native';
+import { StyleSheet, View, ImageBackground,Dimensions,Image,ScrollView,SafeAreaView,TouchableOpacity} from 'react-native';
 import { ApplicationProvider, Layout, Text,Input,Button,Card,List,
      ListElement, ListItemElement, ListProps,Divider } from '@ui-kitten/components';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import Icon from 'react-native-vector-icons/Ionicons';    
+  
 import useAuth from '../../auth/useAuth'; 
+import CountDownHelper from '../Utils/CountDownHelper';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function HomeScreen({navigation}:any) {
   const { user, logOut } = useAuth();
@@ -31,7 +33,25 @@ export default function HomeScreen({navigation}:any) {
     const onActivatePress = (): void => {
         navigation && navigation.navigate('ActivationOptions');
         
-      };   
+      };  
+      
+      React.useLayoutEffect(() => {
+        navigation.setOptions({
+          headerLeft: () => (
+           
+            <SafeAreaView style={{ flex:1 }}>
+            <TouchableOpacity 
+                style={{alignItems:'flex-end',margin:10}}
+                onPress={navigation.openDrawer}
+            >
+                <Icon  name='bars' size={24} color='#161924'/>
+            </TouchableOpacity>
+        </SafeAreaView>
+            
+            
+          ),
+        });
+      }, [navigation]);
 
     return (
 
@@ -42,6 +62,7 @@ export default function HomeScreen({navigation}:any) {
              <ScrollView>
               <View style={styles.container}>
                 <Text style={{alignItems:"flex-start"}}>Welcome  Adebisi</Text>
+                
               </View>
             <View style={styles.container}>
 

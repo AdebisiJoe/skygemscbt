@@ -2,9 +2,22 @@ import React from 'react'
 import { StyleSheet, View, ImageBackground,Dimensions,Image,TouchableWithoutFeedback} from 'react-native';
 import { ApplicationProvider, Layout, Text,Input,Button } from '@ui-kitten/components';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import * as Yup from "yup";
+
+import {
+  ErrorMessage,
+  Form,
+  FormField,
+  SubmitButton,
+} from "../../forms";
 import auth from '../../api/auth';
 import useAuth from '../../auth/useAuth';
 
+
+const validationSchema = Yup.object().shape({
+  phone: Yup.number().required().min(11).label("Phone Number"),
+  password: Yup.string().required().min(4).label("Password"),
+});
 
 
 
@@ -13,8 +26,19 @@ export default function Login({ navigation }:any)  {
   const authUser = useAuth();
   const [phonenumber, setPhoneNumber] = React.useState<string>();
   const [password, setPassword] = React.useState<string>();
-
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
+  const [loginFailed, setLoginFailed] = React.useState(false);
+
+  const handleSubmit = async ({ phone, password }) => {
+    const result = await auth.login(phone, password);
+    console.log(result.data.message)
+    if (!result.ok) return setLoginFailed(true);
+    if(result.data.message=="Invalid Credentials"){
+      return setLoginFailed(true);
+    }
+    setLoginFailed(false);
+    authUser.logIn(result.data.access_token);
+  };
 
   const toggleSecureEntry = () => {
     setSecureTextEntry(!secureTextEntry);
@@ -68,31 +92,47 @@ export default function Login({ navigation }:any)  {
          <Image style={{marginBottom:5, width:100, height:100 }} source={require('../../../assets/images/skygatelogo.png')} />
        </View> 
         <View style={styles.formContainer}>
-          <Input
-            label='PHONE NUMBER'
-            placeholder='Phone Number'          
-            status='warning'
-            value={phonenumber}
-            onChangeText={setPhoneNumber}
+  
+          
+        <Form
+        initialValues={{ email: "", password: "" }}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+        >
+          <ErrorMessage
+            error="Invalid Phone number and/or password."
+            visible={loginFailed}
           />
-          <Input
-            style={styles.passwordInput}
-            placeholder='Password'
-            label='PASSWORD'
-            status='warning'
-            value={password}
-            accessoryRight={renderIcon}
-            
-            secureTextEntry={secureTextEntry}
-            onChangeText={setPassword}
+
+          <FormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          
+          keyboardType="phone-pad"
+          label='Phone Number'
+          name="phone"
+          placeholder="Phone Number"
+          textContentType="Phone Number'"
           />
+
+
+         <FormField
+           style={styles.passwordInput}
+          autoCapitalize="none"
+          autoCorrect={false}
+          accessoryRight={renderIcon}
+          label='PASSWORD'
+          name="password"
+          placeholder="Password"
+          secureTextEntry={secureTextEntry}
+          textContentType="password"
+        />
+       
+        
+
+        <SubmitButton status='warning' title="Login" />
+        </Form>
         </View>
-        <Button
-          status='warning'
-          size='large'
-          onPress={onSignInButtonPress}>
-          SIGN IN
-        </Button>
         <View style={styles.socialAuthContainer}>
 
           <Button

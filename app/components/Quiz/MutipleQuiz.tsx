@@ -6,7 +6,7 @@ import Animated,  { multiply} from 'react-native-reanimated';
 import QuestionSlide from './QuestionSlide';
 import { questions } from './data';
 import  {useScrollHandler}  from 'react-native-redash/lib/module/v1';
-import { Button,Modal, Layout, Tab, TabView, Text} from '@ui-kitten/components';
+import { Button,Modal, Layout, Tab, TabView, Text,TabBar} from '@ui-kitten/components';
 import { Calculator } from 'react-native-calculator'
 import Answers from './Answers';
 import CountDownHelper from '../Utils/CountDownHelper';
@@ -153,20 +153,9 @@ export default function MutipleQuiz({route,navigation}) {
   };
    
     return (
-
-        <View>
+       
+        <View style={{flex:1}}>
             <AfterQuiz subjectScores={subjectScore} showmodal={showmodal} />
-           
-           
-           {/* <Modal style={{flex:1,height:height*0.5,width:250}} visible={showmodal}>
-               
-               <Text>Welcome to UI Kitten 😻</Text>
-               <Button onPress={() => setShowmodal(false)}></Button>
-               
-            </Modal>  */}
-           
-           
-            {/* <View style={{flex:1,height:height*0.5,width:200}}> */}
              
              <Modal style={{flex:1,height:height*0.5,width:250}} visible={visible}>
               
@@ -177,30 +166,42 @@ export default function MutipleQuiz({route,navigation}) {
                </Button>
               
              </Modal>
-             {/* </View> */}
-             
+        
+           <ScrollView>
            <TabView
+           
             selectedIndex={selectedTabIndex}
             onSelect={index => setSelectedTabIndex(index)}>
             
             {subjects.map((subject,index)=>(
               
-
-             <Tab title={subject}>
-                <View style={styles.tabContainer}>
-                  <SubjectQuiz Question={Questions} subject={subject} scoresetter={scoresetter}/>
-                </View>
+              
+             <Tab  title={subject}> 
+             
+              
+                <SubjectQuiz Question={Questions} subject={subject} scoresetter={scoresetter}/> 
+               
              </Tab>
+             
 
-            ))}    
+            ))}   
+ 
 
             </TabView>
-            <View style={{justifyContent:'center',marginHorizontal:20}}>
-              <Button style={{marginTop:20}} onPress={() => onFinishTestPress()}>Submit Test</Button>
-            </View>  
 
+           
+            
+   
+              
+           
+            </ScrollView>  
+
+            <View>
+            <Button style={{marginTop:20}} onPress={() => onFinishTestPress()}>Submit Test</Button>
+            </View>
+            
         </View>
-
+        
     )
 }
 

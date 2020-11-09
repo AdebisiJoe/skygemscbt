@@ -276,32 +276,33 @@ export default  function SubjectQuiz({Question,scoresetter,subject}) {
 
       <QuizContainer >
         
+        <ScrollView>
         
-        <View  style={{flex:1,justifyContent:'center',flexDirection:'column'}}>
+          <View  style={{flex:1,justifyContent:'center',flexDirection:'column'}}>
 
-          <ScrollView>
+          
 
              <View  style={{backgroundColor:'white',alignItems:'center'}}>
                <Text category='label'>{curNum+1}/{Questions.length}</Text>
                
              </View>
-              <View style={{height:height*0.2,backgroundColor:'white',alignItems:'center',marginHorizontal:15,}}>
+              <View style={{backgroundColor:'white',alignItems:'center',marginHorizontal:15,}}>
                  
                   <HTML html={getQuestion(curNum)} imagesMaxWidth={Dimensions.get('window').width}  />
               </View>
 
-              <View style={{flex:1,backgroundColor:"white",height:0.4*height,paddingTop:10,marginVertical:15,flexWrap: 'wrap'}}>
+              <View style={{flex:1,backgroundColor:"white",paddingTop:10,marginVertical:15,flexWrap: 'wrap'}}>
                   
                  <Answers data={getOptions(curNum)} answerSelected={answerSelected} currentSelectedIndex={getCurrentQuestionIndex(curNum)} />  
              
               </View>
 
            
-              <View style={{flex:1,backgroundColor:"white",paddingTop:40,}}>
+              <View style={{flex:1,backgroundColor:"white",paddingTop:40,flexDirection:'row',justifyContent:'center',width:width,flexWrap: 'wrap'}}>
 
                
                 
-                <View style={{backgroundColor:'white',flexDirection:'row',justifyContent:'center',width:width,flexWrap: 'wrap'}}> 
+              
                 <ButtonSwitch  selectedIndex={selectedIndex}
                     onSelect={index => {
                       setSelectedIndex(index)
@@ -325,12 +326,8 @@ export default  function SubjectQuiz({Question,scoresetter,subject}) {
                     </ButtonSwitch>
                 </View> 
                
-             </View>
-
-            <View style={{justifyContent:'center',marginHorizontal:20}}>
-              {/* <Button style={{marginTop:20}} onPress={() => onFinishTestPress()}>Submit Test</Button> */}
+            <View style={{flex:1,justifyContent:'center',marginHorizontal:20}}>
               
-
               <FloatingActionButton 
                   color="red" 
                   position="right"
@@ -359,11 +356,9 @@ export default  function SubjectQuiz({Question,scoresetter,subject}) {
                   />
             </View>
             
-           </ScrollView>
-
-
-        </View>
-           
+          </View>
+          
+        </ScrollView>  
 
       </QuizContainer>
       

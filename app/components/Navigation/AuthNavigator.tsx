@@ -63,12 +63,13 @@ export default function AuthNavigator() {
      return (
       
     <Stack.Navigator>
+      <Stack.Screen name="Login" component={Login}  options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home',headerStyle: { backgroundColor: '#F0F4FF'} }} />
         <Stack.Screen name="SelectSchool" component={SelectSchool} options={{ title: 'Select School',headerStyle: {backgroundColor: '#F0F4FF'} }} />
         <Stack.Screen name="SelectSubjects" component={SelectSubjects} options={{ title: 'Select Subjects',headerStyle: {backgroundColor: '#F0F4FF'} }} />
         <Stack.Screen name="Quiz" component={MutipleQuiz} options={{ title: 'Exam' ,headerStyle: { backgroundColor: '#F0F4FF'} }} />
         <Stack.Screen name="LeaderBoard" component={LeaderBoard} options={{ title: 'Leader Board',headerStyle: {backgroundColor: '#F0F4FF'} }} />
-        <Stack.Screen name="Login" component={Login}  options={{ headerShown: false }} />
+        
         <Stack.Screen name="Register" component={Signup}  options={{ headerShown: false }} />
         <Stack.Screen name="ActivationOptions" component={ActivationOptions}  options={{ title: 'Activation Options',headerStyle: {backgroundColor: '#F0F4FF' } }} />
     </Stack.Navigator> 

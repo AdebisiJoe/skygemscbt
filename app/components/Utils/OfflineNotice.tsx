@@ -1,17 +1,50 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React,{useEffect} from "react";
+import { View, StyleSheet,Platform } from "react-native";
 import Constants from "expo-constants";
 
-// import * as NetInfo from '@react-native-community/netinfo';
+import { useNetInfo }from '@react-native-community/netinfo';
+//import NetInfo  from '@react-native-community/netinfo';
 import NetInfo from 'react-native-web/dist/exports/NetInfo';
 import { Text } from '@ui-kitten/components';
 
 
 
 function OfflineNotice(props) {
-  const netInfo = NetInfo.useNetInfo();
+  const netInfo = useNetInfo();
 
-  if (netInfo.type !== "unknown" && netInfo.isInternetReachable === false)
+  const [networkType, setNetworkType] = React.useState("");
+  const [isInternetReachable, setIsInternetReachable] = React.useState(false);
+
+
+  useEffect(()=>{
+
+    if(Platform.OS=='web'){
+
+    }if(Platform.OS=='android'){
+  
+      //const unsubscribe = netInfo.addEventListener(state => {
+      //   console.log("Connection type", state.type);
+        console.log("Is connected?", netInfo.isConnected);
+        setIsInternetReachable(netInfo.isInternetReachable);
+        setNetworkType(netInfo.type)
+        
+     // });
+    }
+    // netInfo.fetch().then(state => {
+    //   setIsInternetReachable(state.isInternetReachable);
+    //   setNetworkType(state.type)
+      
+    // });
+
+
+     
+   
+  },[networkType,isInternetReachable])
+
+
+  
+
+  if (networkType !== "unknown" && isInternetReachable === false)
     return (
       <View style={styles.container}>
         <Text style={styles.text}>No Internet Connection</Text>
@@ -34,7 +67,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   text: {
-    color:'#fffffff',
+    color:'#ffffff',
   },
 });
 
