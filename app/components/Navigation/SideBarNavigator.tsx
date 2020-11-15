@@ -19,6 +19,7 @@ import AppNavigator from './AppNavigator';
 
 
 
+
 //const Drawer = createDrawerNavigator();
 
 const { Navigator,Screen  } = createDrawerNavigator();
@@ -82,7 +83,7 @@ const DrawerContent = ({ navigation}) => {
     title='Help desk'
     accessoryLeft={HelpIcon}
     accessoryRight={ForwardIcon}
-    onPress={()=> navigation.navigate('ActivationOptions')} 
+    onPress={()=> navigation.navigate('helpdesk')} 
   />
   <DrawerItem
     title='Subscribe'
@@ -91,16 +92,16 @@ const DrawerContent = ({ navigation}) => {
     onPress={()=> navigation.navigate('ActivationOptions')} 
   />
   <DrawerItem
-    title='Progress'
+    title='Progress Report'
     accessoryLeft={ProgressIcon}
     accessoryRight={ForwardIcon}
-    onPress={()=> navigation.navigate('ActivationOptions')} 
+    onPress={()=> navigation.navigate('progress')} 
   />
   <DrawerItem
     title='Terms and Condition'
     accessoryLeft={TandCIcon}
     accessoryRight={ForwardIcon}
-    onPress={()=> navigation.navigate('LeaderBoard')} 
+    onPress={()=> navigation.navigate('termsandcondition')} 
   />
     <DrawerItem
     title='Log out'

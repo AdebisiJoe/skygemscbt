@@ -7,7 +7,7 @@ import QuestionSlide from './QuestionSlide';
 import { questions } from './data';
 import  {useScrollHandler}  from 'react-native-redash/lib/module/v1';
 import { Button,Modal, Layout, Tab, TabView, Text,TabBar} from '@ui-kitten/components';
-import { Calculator } from 'react-native-calculator'
+import { Calculator } from 'react-native-calculator';
 import Answers from './Answers';
 import CountDownHelper from '../Utils/CountDownHelper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -64,7 +64,8 @@ const {height,width}=Dimensions.get('window');
   export type subjectScore={
       subject:string,
       score:number,
-      totalScore:number
+      totalScore:number,
+      timeFinished:number
   }
 
 
@@ -107,14 +108,20 @@ export default function MutipleQuiz({route,navigation}) {
         
         
       ),
+      headerLeft:null
     });
   }, [navigation]);
+
+  useEffect(()=>{
+    
+  })
 
   const scoresetter=(score,subject,totalScore)=>{
       score={
           score,
           subject,
-          totalScore
+          totalScore,
+          timeFinished:0,
       }
 
       setSubjectScore((currScore)=>{
@@ -148,7 +155,7 @@ export default function MutipleQuiz({route,navigation}) {
     // subjectScore.forEach((subject,index)=>{
     //     console.log("hi hi "+subject[0]);
     // });    
-    //setShowmodal(true);
+    setShowmodal(true);
 
   };
    
@@ -211,5 +218,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+
   });
 

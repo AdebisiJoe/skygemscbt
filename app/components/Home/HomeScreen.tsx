@@ -19,11 +19,11 @@ export default function HomeScreen({navigation}:any) {
       }; 
       
     const onTutorPress = (): void => {
-        navigation && navigation.navigate('study');
+        navigation && navigation.navigate('booktutor');
       };
       
     const onProgressPress = (): void => {
-        navigation && navigation.navigate('study');
+        navigation && navigation.navigate('progress');
       };
       
     const onLeaderBoardPress = (): void => {
@@ -34,7 +34,13 @@ export default function HomeScreen({navigation}:any) {
         navigation && navigation.navigate('ActivationOptions');
         
       };  
+
+    const onAskQuestionPress = (): void => {
+        navigation && navigation.navigate('askquestion');
+        
+      };  
       
+
       React.useLayoutEffect(() => {
         navigation.setOptions({
           headerLeft: () => (
@@ -71,10 +77,10 @@ export default function HomeScreen({navigation}:any) {
                 <View>
 
                        <View style={styles.layout} >
-                          <Card style={[styles.shortCard1]} onPress={() => onStudyPress()}  >
-                            <Image resizeMode="contain" style={{ width: 70, height: 70,alignSelf:'center',marginTop:wp('-1%') }} source={require('../../../assets/images/studying.png')} />    
+                          <Card style={[styles.shortCard1]} onPress={() => onPastQuestionPress()}  >
+                            <Image resizeMode="contain" style={{ width: 70, height: 70,alignSelf:'center',marginTop:wp('-1%') }} source={require('../../../assets/images/quiz.png')} />    
                             <Text style={{color:'#fff',alignSelf:'center',marginTop:wp('2%')}}>
-                                Study
+                                Past Question
                             </Text>
                           </Card>   
                        </View>
@@ -94,11 +100,11 @@ export default function HomeScreen({navigation}:any) {
 
                 <View>
                     <View style={styles.layout} >
-                    <Card style={[styles.shortCard2]}   onPress={() => onPastQuestionPress()}  >
+                    <Card style={[styles.shortCard2]}   onPress={() => onAskQuestionPress()}  >
                         
-                        <Image resizeMode="contain" style={{ width: 70, height: 70,alignSelf:'center',marginTop:wp('-1%') }} source={require('../../../assets/images/quiz.png')} />    
+                        <Image resizeMode="contain" style={{ width: 70, height: 70,alignSelf:'center',marginTop:wp('-1%') }} source={require('../../../assets/images/question.png')} />    
                         <Text style={{color:'#fff',alignSelf:'center',marginTop:wp('2%')}}>
-                        Past Question
+                        Ask Question
                         </Text>
                        
                       </Card>

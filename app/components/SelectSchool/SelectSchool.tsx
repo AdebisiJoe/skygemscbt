@@ -41,7 +41,7 @@ export default function SelectSchool({ navigation }:any) {
     <ImageBackground
 
       style={styles.selectschoolbackground}
-      resizeMode="contain"
+      resizeMode="cover"
       source={require('../../../assets/images/homeplain.png')}> 
         {/* <TopNavigation
           accessoryLeft={BackAction}
@@ -68,7 +68,7 @@ export default function SelectSchool({ navigation }:any) {
 
 const styles = StyleSheet.create({
   selectschoolbackground:{
-    height:Dimensions.get('window').height,
-    width:Dimensions.get('window').width
+    height:'100%',
+    width:'100%'
    },
 });
