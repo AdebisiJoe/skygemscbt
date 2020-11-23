@@ -1,9 +1,9 @@
 {
-  "name": "skygatescbt",
-  "displayName": "skygatescbt",
+  "name": "skygems",
+  "displayName": "skygems",
   "expo": {
-    "name": "skygatescbt",
-    "slug": "skygatescbt",
+    "name": "skygems",
+    "slug": "skygems",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
